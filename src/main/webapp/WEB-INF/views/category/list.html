@@ -1,25 +1,85 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Category List</title>
-</head>
+<head th:replace="category/layout::head"></head>
 <body>
-<h1>Category List</h1>
-<p><a href="/categories/create">Create New Categories</a></p>
-<table>
-    <tr>
-        <td>ID</td>
-        <td>Name</td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr th:each="category : ${categories}">
-        <td th:text="${category.id}"></td>
-        <td><a th:href="@{/categories/__${category.id}__}" th:text="${category.name}"></a></td>
-        <td><a th:href="@{/categories/edit/__${category.id}__}">Edit</a></td>
-        <td><a th:href="@{/categories/delete/__${category.id}__}">Delete</a></td>
-    </tr>
-</table>
+<div class = container>
+
+    <div class = container>
+        <h2>Category List</h2>
+        <div class="row">
+            <div class="col">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                    <a href="/categories/create"><button class="btn btn-primary me-md-2" type="button"><i class="fas fa-plus"></i> Add new category</button></a>
+                </div>
+            </div>
+            <div class="col">
+                <form action="/products?action=searchName" method="post">
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <input type="text" class=" me-md-2" placeholder="Search" name="q">
+                        <button class="btn btn-primary" ><i class="fas fa-search"></i> Search</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-header">
+                <i class="far fa-list-alt"></i> Product List
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <table class = "table table-bordered" >
+                        <thead>
+                        <th class="text-center">#</th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">Name</th>
+
+
+                        <th colspan="2" class="text-center">Action</th>
+                        </thead>
+                        <tbody>
+                            <tr th:each="category,state : ${categories}">
+                                <td class="align-middle text-center" th:text="${state.count}"></td>
+                                <td class="align-middle text-center" th:text="${category.id}">${category.id}</td>
+                                <td class="align-middle text-center"><a th:href="@{/categories/__${category.id}__}" th:text="${category.name}"></a></td>
+
+
+                                <td class="align-middle text-center"><a th:href="@{/categories/edit/__${category.id}__}"><button type="button" class="btn btn-primary"> <i class="far fa-edit"></i> Edit</button></a></td>
+                                <td class="align-middle text-center "><a th:href="@{/categories/delete/__${category.id}__}"><button type="button" class="btn btn-danger"><i class="fas fa-eraser"></i> Delete</button></a></td>
+                            </tr>
+
+                        </tbody>
+
+
+                    </table>
+                </blockquote>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+<!--<h1>Category List</h1>-->
+<!--<p><a href="/categories/create">Create New Categories</a></p>-->
+<!--<table>-->
+<!--    <tr>-->
+<!--        <td>ID</td>-->
+<!--        <td>Name</td>-->
+<!--        <td></td>-->
+<!--        <td></td>-->
+<!--    </tr>-->
+<!--    <tr th:each="category : ${categories}">-->
+<!--        <td th:text="${category.id}"></td>-->
+<!--        <td><a th:href="@{/categories/__${category.id}__}" th:text="${category.name}"></a></td>-->
+<!--        <td><a th:href="@{/categories/edit/__${category.id}__}">Edit</a></td>-->
+<!--        <td><a th:href="@{/categories/delete/__${category.id}__}">Delete</a></td>-->
+<!--    </tr>-->
+<!--</table>-->
+
+<footer th:replace="product/layout::footer"></footer>
 </body>
 </html>
